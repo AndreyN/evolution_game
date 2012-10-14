@@ -1,0 +1,12 @@
+фаза развития					evolution stage
+фаза определения кормовой базы	recognition stage
+фаза питания					feeding stage
+фаза вымирания					dying stage
+фаза получения новых карт		dealing stage
+
+rule "Is can pirate"
+when
+    $a : Creature(hasAbility(Ability.PIRACY))
+then
+    $a.setCanPirate(true);
+end

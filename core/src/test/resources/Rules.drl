@@ -1,0 +1,40 @@
+dialect "mvel"
+import ru.nikonov.evolution.Creature;
+import ru.nikonov.evolution.Ability;
+
+rule "Is can pirate creature"
+salience 100
+when
+    $pirate : Creature(hasAbility(Ability.PIRACY), getRequiredFood() != getFood())
+    $creature: Creature( this != $pirate, getRequiredFood() != getFood()) 
+then
+    $pirate.setCanPirate(true);
+    System.out.println("100, Is can pirate creature");
+end
+
+rule "Is not pirate"
+salience 110
+when
+    $pirate : Creature()
+then
+    $pirate.setCanPirate(false);
+    System.out.println("110, Is not pirate");
+end
+
+rule "Is can eat creature"
+salience 105
+when
+    $pirate : Creature(hasAbility(Ability.CARNIVOROUS), getRequiredFood() != getFood())
+then
+    $pirate.setCarnivorous(true);
+    System.out.println("105, Is can eat creature");
+end
+
+rule "Is not ñarnivorous"
+salience 115
+when
+    $pirate : Creature()
+then
+    $pirate.setCarnivorous(false);
+    System.out.println("115, Is not ñarnivorous");
+end

@@ -1,0 +1,11 @@
+dialect "mvel"
+import ru.nikonov.evolution.Creature;
+import ru.nikonov.evolution.Ability;
+
+rule "Is can pirate creature"
+when
+    $pirate : Creature(hasAbility(Ability.PIRACY), getRequiredFood() != getFood())
+    $creature: Creature( this != $pirate, getRequiredFood() != getFood()) 
+then
+    $pirate.setCanPirate(true);
+end
